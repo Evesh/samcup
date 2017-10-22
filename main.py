@@ -47,13 +47,13 @@ def home(message):
         img.close()
 
     elif message.text == "Загрузить Kate Mobile":
-        bot.send_message(message.chat.id, "*Загрузить Kate Mobile сейчас невозможно.* Сожалеем об этом.", parse_mode="Markdown")
-#        url = "http://katemobile.ru/dl/Kate.apk"
-#        urllib.urlretrieve(url, 'Kate.apk')
-#        document = open('kate.apk', 'rb')
-#        bot.send_chat_action(message.from_user.id, 'upload_document')
-#        bot.send_document(message.from_user.id, document)
-#        document.close()
+        bot.send_message(message.chat.id, "_Одну секунду..._", parse_mode="Markdown")
+        url = "http://katemobile.ru/dl/Kate.apk"
+        urllib.request.urlretrieve(url, 'Kate.apk')
+        document = open('kate.apk', 'rb')
+        bot.send_chat_action(message.from_user.id, 'upload_document')
+        bot.send_document(message.from_user.id, document)
+        document.close()
 
     elif message.text == "Погода \u2601" or message.text == "Погода":
         bot.send_message(message.chat.id, "В каком городе показать погоду?")
@@ -66,7 +66,7 @@ def home(message):
         soup = BeautifulSoup(r.text, "html.parser")
         news = soup.find_all(class_="home-link list__item-content home-link_black_yes")
         bot.send_message(message.chat.id, "*Главные новости:*", parse_mode="Markdown")
-        for new_cur in news[0:3]:
+        for new_cur in news[0:5]:
             bot.send_message(message.chat.id, new_cur.get("aria-label"))
         bot.send_message(message.chat.id, "*Санкт-Петербург:*", parse_mode="Markdown")
         for new_cur in news[5:10]:
